@@ -1,0 +1,26 @@
+﻿@model List<HW5.Models.Image>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="m-2">
+    <a href="@Url.Action("Add", "Image")" class="btn btn-success">Add</a>
+</div>
+
+<div class="card-deck">
+    @foreach (var book in Model)
+    {
+        <div class="card">
+            <img src="data:image/png;base64, @book.Base64" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@book.Name</h5>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-danger" href="@Url.Action("Delete", "Image", new { id = book.ID})">Delete</a>
+            </div>
+        </div>
+    }
+</div>

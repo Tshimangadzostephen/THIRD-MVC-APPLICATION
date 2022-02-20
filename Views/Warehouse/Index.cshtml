@@ -1,0 +1,24 @@
+﻿@model List<HW5.Models.Book>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Stock</h2>
+
+<div class="card-deck">
+    @foreach (var book in Model)
+    {
+        <div class="card">
+            <img src="data:image/png;base64, @(book.Image != null ? book.Image.Base64 : "E")" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@book.Title</h5>
+                <p class="card-text">@Html.Raw(book.GetInfo())</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-warning" href="@Url.Action("Update", book.ToString(), new { isbn = book.ISBN })">Update Details</a> 
+            </div>
+        </div>
+    }
+</div>
+

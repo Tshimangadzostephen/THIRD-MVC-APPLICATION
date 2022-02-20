@@ -1,0 +1,71 @@
+﻿@model HW5.Models.Manga
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="m-4">
+    <h2>Order Manga</h2>
+</div>
+
+<div class="col-7">
+    @using (Html.BeginForm("Order", "Manga", FormMethod.Post))
+    {
+        <div class="form-row">
+            <div class="form-group col-5">
+                @Html.LabelFor(m => m.Title)
+                @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="form-group col-5">
+                @Html.LabelFor(m => m.Author)
+                @Html.EditorFor(m => m.Author, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="form-group col-2">
+                @Html.LabelFor(m => m.Price)
+                @Html.EditorFor(m => m.Price, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-5">
+                @Html.LabelFor(m => m.Genre)
+                @Html.EditorFor(m => m.Genre, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="form-group col-5">
+                @Html.LabelFor(m => m.ISBN)
+                @Html.EditorFor(m => m.ISBN, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="form-group col-2">
+                @Html.LabelFor(m => m.Stock)
+                @Html.EditorFor(m => m.Stock, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-5">
+                @Html.LabelFor(m => m.Studio)
+                @Html.EditorFor(m => m.Studio, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="form-group col-2">
+                @Html.LabelFor(m => m.Volume)
+                @Html.EditorFor(m => m.Volume, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-12">
+                @Html.LabelFor(m => m.Image)
+                @Html.DropDownListFor(n => n.Image.ID, Model.selectList, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <input class="btn btn-primary" type="submit" />
+        <a class="btn btn-secondary" href="@Url.Action("Index", "Warehouse")">Cancel</a>
+    }
+
+</div>

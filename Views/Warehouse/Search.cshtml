@@ -1,0 +1,97 @@
+﻿@model List<HW5.Models.Book>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search</h2>
+
+<div class="col-7 mb-3">
+    @using (Html.BeginForm("Search", "Warehouse", FormMethod.Post))
+    {
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label>Field: </label>
+                <select class="form-control" name="field">
+                    <option value="0">Title</option>
+                    <option value="1">Author</option>
+                    <option value="2">Genre</option>
+                    <option value="3">ISBN</option>
+
+                    <option value="4">Studio</option>
+                    <option value="5">Publisher</option>
+                    <option value="6">Subject</option>
+                </select>
+            </div>
+
+            <div class="form-group col-5">
+                <label>Term: </label>
+                <input type="text" class="form-control" name="term" />
+            </div>
+        </div>
+
+        <input class="btn btn-primary" type="submit" />
+        <a class="btn btn-secondary" href="@Url.Action("Index", "Warehouse")">Cancel</a>
+    }
+
+</div>
+
+@if (Model.Count == 0)
+{
+    <h5>No results found</h5>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>ISBN</th>
+                <th>Studio</th>
+                <th>Publisher</th>
+                <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+            <tr>
+                <td>@book.ToString()</td>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.Genre</td>
+                <td>@book.ISBN</td>
+                @if (book.GetType() == typeof(HW5.Models.Manga))
+                {
+                    <td>@(((HW5.Models.Manga)book).Studio)</td>
+                }
+                else
+                {
+                    <td>N/A</td>
+                }
+
+                @if (book.GetType() == typeof(HW5.Models.Novel))
+                {
+                    <td>@(((HW5.Models.Novel)book).Publisher)</td>
+                }
+                else
+                {
+                    <td>N/A</td>
+                }
+
+                @if (book.GetType() == typeof(HW5.Models.TextBook))
+                {
+                    <td>@(((HW5.Models.TextBook)book).Subject)</td>
+                }
+                else
+                {
+                    <td>N/A</td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+}
